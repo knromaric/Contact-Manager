@@ -12,10 +12,13 @@ class Contact extends Component {
     dispatch({type: 'DELETE_CONTACT', payload: id});
   };
 
+  onShowContactDetails = ()=>{
+    this.setState({showContactDetails: !this.state.showContactDetails})
+  }
+  
   render() {
     const { name, email, phone,id} = this.props.contact;
     const { showContactDetails } = this.state;
-
 
     return (
       <Consumer>
