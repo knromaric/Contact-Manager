@@ -6,19 +6,25 @@ class Contact extends Component {
     showContactDetails: false
   };
 
-  onShowContactDetails = e => {
+  onShowContactDetails = () => {
     this.setState({ showContactDetails: !this.state.showContactDetails });
   };
 
   render() {
-    const { name, email, phone } = this.props.contact;
+    const { name, email, phone, id:contactId } = this.props.contact;
+    const {onDeleteContact} = this.props;
     const { showContactDetails } = this.state;
 
     return (
-      <div className="card card-body mb-3">
+      <div className="card card-body mb-3 pointer">
         <h4>
           {name}{" "}
-          <i onClick={this.onShowContactDetails} className="fas fa-sort-down" />
+          <i onClick={this.onShowContactDetails} 
+            className="fas fa-sort-down"
+            style={{cursor: "pointer"}} />
+          <i className="fas fa-times" 
+            onClick={()=>onDeleteContact(contactId)}
+            style={{cursor:'pointer', float:'right', color:'#DC3545'}}></i>
         </h4>
         {showContactDetails ? (
           <ul className="list-group">

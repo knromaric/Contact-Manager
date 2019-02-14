@@ -7,13 +7,21 @@ class Contacts extends Component {
     contacts: contactList
   };
 
+  handleDeleteContact = contactId => {
+    const contacts = this.state.contacts.filter(
+      contact => contact.id !== contactId
+    );
+    this.setState({ contacts });
+  };
+
   render() {
-    const {contacts} = this.state;
+    const { contacts } = this.state;
 
     return contacts.map(contact => (
       <Contact
         key={contact.id}
         contact={contact}
+        onDeleteContact={this.handleDeleteContact}
       />
     ));
   }
