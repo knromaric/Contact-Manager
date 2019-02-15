@@ -50,6 +50,8 @@ class AddContactForm extends Component {
       phone: "",
       errors: {}
     });
+
+    this.props.history.push('/');
   };
 
   render() {
