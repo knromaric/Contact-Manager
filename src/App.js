@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import AddContactForm from './components/AddContactForm/AddContactForm';
 import {Provider} from './context';
+import NotFound from './components/StaticPages/NotFound';
 
 class App extends Component {
   render() {
@@ -16,9 +17,12 @@ class App extends Component {
           <div className="App">
             <Header branding="Contact Manager" />
             <div className="container">
-              <Route exact path="/" component={Contacts} />
-              <Route exact path="/contact/add" component={AddContactForm} />
-              <Route exact path="/about" component={About} />
+              <Switch>
+                <Route exact path="/" component={Contacts} />
+                <Route exact path="/contact/add" component={AddContactForm} />
+                <Route exact path="/about" component={About} />
+                <Route component={NotFound} />
+              </Switch>
             </div>
           </div>
         </Router>
