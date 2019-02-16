@@ -8,12 +8,14 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import AddContactForm from './components/AddContactForm/AddContactForm';
 import {Provider} from './context';
 import NotFound from './components/StaticPages/NotFound';
+import EditContact from './components/EditContact/EditContact';
+
 
 class App extends Component {
   render() {
     return (
       <Provider>
-        <Router>
+        <Router basename={process.env.PUBLIC_URL}>
           <div className="App">
             <Header branding="Contact Manager" />
             <div className="container">
@@ -21,6 +23,7 @@ class App extends Component {
                 <Route exact path="/" component={Contacts} />
                 <Route exact path="/contact/add" component={AddContactForm} />
                 <Route exact path="/about" component={About} />
+                <Route exact path="/contact/edit/:id" component={EditContact} />
                 <Route component={NotFound} />
               </Switch>
             </div>

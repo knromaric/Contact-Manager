@@ -17,7 +17,19 @@ const reducer = (state, action) => {
       return {
         ...state,
         contacts: [action.payload, ...state.contacts]
+      };
+    case 'UPDATE_CONTACT':
+    {
+      return {
+        ...state,
+        contacts: state.contacts.map(
+          contact => 
+            contact.id === action.payload.id 
+              ? (contact = action.payload) 
+              : contact
+        )
       }
+    }
     default:
       return state;
   }
@@ -29,19 +41,20 @@ export class Provider extends Component {
     dispatch: action => this.setState(state => reducer(state, action))
   };
 
-  async componentDidMount(){
+  async componentDidMount() {
     const res = await axios.get('https://jsonplaceholder.typicode.com/users')
-    this.setState({contacts: res.data}); 
+    this.setState({
+      contacts: res.data
+    });
   }
 
   render() {
     return ( 
-    <Context.Provider value = {
+      <Context.Provider value = {
         this.state
       } > {
         this.props.children
-      } 
-    </Context.Provider>
+      } </Context.Provider>
     );
   }
 }
